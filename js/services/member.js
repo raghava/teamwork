@@ -42,7 +42,7 @@ app.service('MemberService', function($uibModal) {
 
   this.create = function(member){
     return $uibModal.open({
-      templateUrl: 'https://rawgithub.com/raghava/teamwork/master/js/templates/member-modal.html',
+      templateUrl: 'js/templates/member-modal.html',
       controller: 'ModalInstanceCtrl',
       resolve: {
         options: {
