@@ -1,6 +1,6 @@
 app.directive('teamMembers', function(MemberService){
   return {
-    templateUrl: 'js/templates/team-members.html',
+    templateUrl: 'https://rawgithub.com/raghava/teamwork/master/js/templates/team-members.html',
     link: function($scope, ele){
         $scope.filterByName = '';
         $scope.members = MemberService.fetch();
