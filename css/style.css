@@ -71,3 +71,7 @@ a.fc-event.vaction {
   border: 1px solid #CE5555;
   color: #9A2020;
 }
+
+.sidebar-menu>li>a{
+  padding: 5px;
+}

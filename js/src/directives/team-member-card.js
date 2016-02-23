@@ -5,11 +5,11 @@ app.directive('teamMemberCard', function(MemberService, $rootScope, TasksService
 
       var colors = ['blue', 'green', 'yellow', 'red'];
 
+      // get random theme
+      $scope.themeColor = 'bg-'+colors[(Math.floor(Math.random() * 4) )];
+
       $scope.memberId = null;
       $scope.get = function(){
-        // get random theme
-        $scope.themeColor = 'bg-'+colors[(Math.floor(Math.random() * 4) )];
-
         $scope.member = MemberService.getById($scope.memberId);
         $scope.tasks = TasksService.byMemberId($scope.memberId);
       };
@@ -25,6 +25,21 @@ app.directive('teamMemberCard', function(MemberService, $rootScope, TasksService
       $scope.close = function(){
         $scope.memberId = $scope.member = null;
         $rootScope.$emit('MEMBER:UNSELECT');
+      };
+
+      $scope.create = function(){
+        var task = {
+          memberId: $scope.memberId,
+          title: '',
+          start: d,
+          end: d
+        };
+
+        TasksService.modal(task)
+          .result.then(function(options){
+            TasksService.add(options.task);
+            $rootScope.$emit('MEMBER:SELECT', $scope.memberId);
+          });
       };
 
       $rootScope.$on('MEMBER:SELECT', function(ev, memberId){

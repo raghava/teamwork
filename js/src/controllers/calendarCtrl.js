@@ -15,16 +15,26 @@ app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, Memb
     });
   };
 
-  $scope.eventClick = function(event, jsEvent) {
-    // $uibModal.open({
-    //   animation: $scope.animationsEnabled,
-    //   templateUrl: 'js/templates/calendar-event.html',
-    //   controller: 'ModalInstanceCtrl',
-    //   resolve: {
-    //     event: event,
-    //     member: MemberService.getById(event.memberId),
-    //   }
-    // });
+  $scope.mode = 'ALL';
+
+  $scope.eventClick = function(event) {
+    var task = {
+      id: event.id,
+      memberId: event.memberId,
+      title: event.title,
+      start: event._start._d,
+      end: event._end._d
+    };
+
+    TasksService.modal(task)
+      .result.then(function(options){
+        TasksService.update(options.task);
+        if($scope.mode === 'MEMBER') {
+          $rootScope.$emit('MEMBER:SELECT', options.task.memberId);
+        } else {
+          $rootScope.$emit('MEMBER:UNSELECT');
+        }
+      });
   };
 
   /* event source that contains custom events on the scope */
@@ -45,7 +55,7 @@ app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, Memb
         week: 'week'
       },
       events: $scope.events,
-      // eventClick: $scope.eventClick,
+      eventClick: $scope.eventClick,
       eventRender: $scope.eventRender,
       dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -55,10 +65,12 @@ app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, Memb
   $scope.eventSources = [];
 
   $rootScope.$on('MEMBER:SELECT', function(ev, memberId){
+    $scope.mode = 'MEMBER';
     $scope.uiConfig.calendar.events = TasksService.byMemberId(memberId);
   });
 
   $rootScope.$on('MEMBER:UNSELECT', function(ev){
+    $scope.mode = 'ALL';
     $scope.uiConfig.calendar.events = TasksService.fetch();
   });
 });
