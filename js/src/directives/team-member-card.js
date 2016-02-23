@@ -28,6 +28,7 @@ app.directive('teamMemberCard', function(MemberService, $rootScope, TasksService
       };
 
       $scope.create = function(){
+        var d = new Date();
         var task = {
           memberId: $scope.memberId,
           title: '',

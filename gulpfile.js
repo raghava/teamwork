@@ -34,6 +34,6 @@ gulp.task('templates', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.js[0], ['templates', 'scripts']);
-  gulp.watch(paths.templates[0], ['templates', 'scripts']);
+  gulp.watch(paths.js[0], ['scripts']);
+  gulp.watch(paths.templates[0], ['templates']);
 });

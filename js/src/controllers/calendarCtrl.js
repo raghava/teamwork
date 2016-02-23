@@ -16,15 +16,17 @@ app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, Memb
   };
 
   $scope.mode = 'ALL';
-
   $scope.eventClick = function(event) {
     var task = {
       id: event.id,
       memberId: event.memberId,
       title: event.title,
-      start: event._start._d,
-      end: event._end._d
+      start: event._start._d
     };
+
+    if(event._end && event._end._d) {
+      task.end = event._end._d;
+    }
 
     TasksService.modal(task)
       .result.then(function(options){
@@ -73,4 +75,5 @@ app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, Memb
     $scope.mode = 'ALL';
     $scope.uiConfig.calendar.events = TasksService.fetch();
   });
+
 });

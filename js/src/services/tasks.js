@@ -1,4 +1,4 @@
-app.service('TasksService', function($uibModal) {
+app.service('TasksService', function($uibModal, MemberService) {
   var date = new Date(),
     d = date.getDate(),
     m = date.getMonth(),
@@ -131,12 +131,12 @@ app.service('TasksService', function($uibModal) {
   };
 
   this.modal = function(task) {
-    var d = new Date();
     return $uibModal.open({
       templateUrl: 'templates/task-modal.html',
       controller: 'ModalInstanceCtrl',
       resolve: {
         options: {
+          member: MemberService.getById(task.memberId),
           task: task
         }
       }

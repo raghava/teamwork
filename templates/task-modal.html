@@ -3,6 +3,13 @@
 </div>
 <div class="modal-body">
   <form>
+
+    <div class="form-group">
+      <avatar ng-if="options.member.id" member-id="options.member.id" size="avatar-md" style="float:left;"></avatar>
+      <h2>{{ options.member.username }}</h2>
+    </div>
+    <br><br>
+
     <div class="form-group">
       <label>Title</label>
       <input type="text" class="form-control" ng-model="options.task.title" placeholder="Task title">
