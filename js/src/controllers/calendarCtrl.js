@@ -33,7 +33,7 @@ app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, Memb
   /* config object */
   $scope.uiConfig = {
     calendar: {
-      height: 700,
+      height: 600,
       header: {
         left: 'prev,next today',
         center: 'title',
