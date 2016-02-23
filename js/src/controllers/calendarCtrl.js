@@ -1,9 +1,5 @@
-// home-controller
-app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, MemberService, $uibModal) {
-  var date = new Date();
-  var d = date.getDate();
-  var m = date.getMonth();
-  var y = date.getFullYear();
+// calendar controller
+app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, MemberService, TasksService, $rootScope) {
 
   $scope.eventRender = function(event, element, view) {
     var member = MemberService.getById(event.memberId);
@@ -32,62 +28,21 @@ app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, Memb
   };
 
   /* event source that contains custom events on the scope */
-  $scope.events = [
-    {
-      title: 'Working on test cases',
-      start: new Date(y, m, 1),
-      memberId: 1
-    },
-    {
-      title: 'Bug-136346443',
-      start: new Date(y, m, d - 5),
-      end: new Date(y, m, d - 2),
-      memberId: 2
-    },
-    {
-      id: 999,
-      title: 'UI transformation of project home page',
-      start: new Date(y, m, d - 3, 16, 0),
-      allDay: false,
-      memberId: 3
-    },
-    {
-      id: 999,
-      title: 'Bug-136346993',
-      start: new Date(y, m, d + 4, 16, 0),
-      allDay: false,
-      memberId: 1
-    },
-    {
-      title: 'Database architecture redesign',
-      start: new Date(y, m, d + 1, 19, 0),
-      end: new Date(y, m, d + 1, 22, 30),
-      allDay: true,
-      memberId: 2
-    },
-    {
-      id: 999,
-      title: 'jQuery framework evaluation',
-      start: new Date(y, m, d + 4, 16, 0),
-      allDay: false,
-      memberId: 3
-    }
-  ];
+  $scope.events = TasksService.fetch();
 
   /* config object */
   $scope.uiConfig = {
     calendar: {
-      height: 600,
+      height: 700,
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'month,agendaWeek'
       },
       buttonText: {
         today: 'today',
         month: 'month',
-        week: 'week',
-        day: 'day'
+        week: 'week'
       },
       events: $scope.events,
       // eventClick: $scope.eventClick,
@@ -98,4 +53,12 @@ app.controller('calendarCtrl', function($scope, $compile, uiCalendarConfig, Memb
   };
   /* event sources array*/
   $scope.eventSources = [];
+
+  $rootScope.$on('MEMBER:SELECT', function(ev, memberId){
+    $scope.uiConfig.calendar.events = TasksService.byMemberId(memberId);
+  });
+
+  $rootScope.$on('MEMBER:UNSELECT', function(ev){
+    $scope.uiConfig.calendar.events = TasksService.fetch();
+  });
 });

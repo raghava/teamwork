@@ -13,11 +13,8 @@
 <ul class="sidebar-menu">
   <li class="header">
     MEMBERS
-    <button type="button" class="btn btn-xs" data-widget="collapse" style="float:right;" ng-click="add()">
-      <i class="icon ion-person-add"></i>
-    </button>
   </li>
-  <li ng-repeat="member in members | filter: { username: filterByName }" ng-model="member" ng-click="add(member)">
-    <i ng-class="avatar(member)"></i>&nbsp;{{ member.username}}
+  <li ng-repeat="member in members | filter: { username: filterByName }" ng-model="member" ng-click="select(member.id)">
+    <a href="#"><i ng-class="avatar(member)"></i>&nbsp;{{ member.username}}</a>
   </li>
 </ul>

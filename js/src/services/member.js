@@ -3,17 +3,32 @@ app.service('MemberService', function($uibModal) {
     {
       id: 1,
       username: 'David',
+      role: 'Developer',
       avatar: 'avatar-color-35'
     },
     {
       id: 2,
       username: 'Alex',
+      role: 'UI Developer',
       avatar: 'avatar-color-25'
     },
     {
       id: 3,
       username: 'Bobby',
+      role: 'QA Engineer',
       avatar: 'avatar-color-40'
+    },
+    {
+      id: 4,
+      username: 'Matt',
+      role: 'Product Guy',
+      avatar: 'avatar-color-200'
+    },
+    {
+      id: 5,
+      username: 'Deep',
+      role: 'Build Guy',
+      avatar: 'avatar-color-20'
     }
   ];
 
@@ -42,7 +57,7 @@ app.service('MemberService', function($uibModal) {
 
   this.create = function(member){
     return $uibModal.open({
-      templateUrl: 'js/templates/member-modal.html',
+      templateUrl: 'templates/member-modal.html',
       controller: 'ModalInstanceCtrl',
       resolve: {
         options: {

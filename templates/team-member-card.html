@@ -1,0 +1,50 @@
+<div class="box box-widget widget-user-2" ng-if="show()">
+  <!-- Add the bg color to the header using any of the bg-* classes -->
+  <div class="widget-user-header" ng-class="themeColor">
+
+    <button type="button" class="close" aria-label="Close" ng-click="close()">
+      <span aria-hidden="true">x</span>
+    </button>
+
+    <div class="widget-user-image">
+      <avatar ng-if="member.id" member-id="member.id" size="avatar-md"></avatar>
+    </div>
+    <!-- /.widget-user-image -->
+    <h3 class="widget-user-username">{{ member.username }}</h3>
+    <h5 class="widget-user-desc">{{ member.role }}</h5>
+  </div>
+  <div class="box-footer no-padding">
+    <ul class="nav nav-stacked">
+      <li>
+        <a href="#">
+          <b>Tasks</b>
+          <span class="pull-right badge bg-aqua">{{ tasks.length }}</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="products-list product-list-in-box" style="margin-bottom: 0px;">
+      <li ng-repeat="task in tasks" class="item" style="padding: 0px;">
+        <div class="box box-task-card">
+
+          <div class="box-header">
+            <h3 class="box-title">Task#{{ $index+1 }} {{ task.title }}</h3>
+          </div>
+
+          <table class="table">
+            <tbody>
+            <tr>
+              <td>Start date</td>
+              <td>{{ task.start | date: 'short'}}</td>
+            <tr>
+            <tr>
+              <td>End date</td>
+              <td>{{ task.end | date: 'short'}}</td>
+            <tr>
+            </tbody>
+          </table>
+
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

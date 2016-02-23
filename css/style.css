@@ -31,4 +31,43 @@
 .avatar-username{
   background-color: #116690;
   margin-bottom: 5px;
+  color: #FFF;
+}
+
+.widget-user-image{
+  display: inline-block;
+  float: left;
+}
+
+avatar{
+  display: block;
+  text-align: center;
+}
+
+avatar i.avatar{
+  border-radius: 50%;
+  border: 3px solid #FFF;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.4);
+}
+
+.box-task-card {
+  background-color: #FDF08D;
+  border: 1px solid #F3DA21;
+  margin: 10px;
+  width: auto;
+  box-shadow: 0 5px 8px rgba(0,0,0,0.3);
+}
+
+.box-task-card table td{
+  border-bottom: 1px solid #F3DA21;
+}
+
+.box-header {
+  background-color: #F3DA21;
+}
+
+a.fc-event.vaction {
+  background-color: #ECC7C7;
+  border: 1px solid #CE5555;
+  color: #9A2020;
 }
